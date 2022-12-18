@@ -18,6 +18,11 @@ public class accountModel {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	public accountModel() {
+		super();
+	}
+
+
 	public String getPassword() {
 		return password;
 	}

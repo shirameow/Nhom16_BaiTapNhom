@@ -1,5 +1,5 @@
 package controller;
-import DAO.loginDAO;
+
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DAO.loginDAO;
-import model.accountModel;
+import model.*;
+import DAO.ThongtintaikhoanDAO;
 /**
  * Servlet implementation class loginController
  */
@@ -31,18 +32,39 @@ public class loginController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String user= request.getParameter("Email");
 		String password= request.getParameter("Password");
-		String role=request.getParameter("role");
 		loginDAO check = new loginDAO();
 		accountModel account=check.getAccount(user, password);
-		System.out.println(account.getUsername());
-		System.out.println(account.getRole());
+		
 		if(account!=null) {
 			HttpSession session=request.getSession();
 			session.setAttribute("account", account);
-			RequestDispatcher rq= request.getRequestDispatcher("home.jsp");
-			rq.forward(request, response);
 			
+			ThongtintaikhoanDAO thongtin = new ThongtintaikhoanDAO();
+			if(account.getRole().equals("Sinh Viên")) {
+				SinhVienModel sv=new SinhVienModel();
+				sv = thongtin.ThongTinSV(account.getUsername());
+				session.setAttribute("Info", sv);
+			}
+			else if(account.getRole().equals("Giảng Viên")) {
+				GiangVienModel gv=new GiangVienModel();
+				gv = thongtin.ThongTinGV(account.getUsername());
+				session.setAttribute("Info", gv);
+			}
+			else if(account.getRole().equals("Admin")) {
+				AdminModel ad=new AdminModel();
+				ad = thongtin.ThongTinAd(account.getUsername());
+				session.setAttribute("Info", ad);
+			}
+			RequestDispatcher rq= request.getRequestDispatcher("home.jsp");
+			rq.forward(request, response);	
 		}
+		else {
+			String mess="Tài Khoản hoặc Mật Khẩu Không chính xác!";
+			request.setAttribute("mess",mess);
+			RequestDispatcher rq= request.getRequestDispatcher("index.jsp");
+			rq.forward(request, response);	
+		}
+		
 	}
 
 }
