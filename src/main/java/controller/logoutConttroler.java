@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +21,8 @@ public class logoutConttroler extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session=request.getSession();
 		session.invalidate();
+		ServletContext sc=getServletContext();
+		sc.removeAttribute("accAdminXem");
 		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 

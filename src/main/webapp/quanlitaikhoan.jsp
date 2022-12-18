@@ -88,7 +88,7 @@
                                 </table>
 								<c:if test="${messXTK != null}">
 						<h3 class="" style="text-align: center;color: #f44336;">${messXTK}</h3>
-					</c:if>>
+					</c:if>
                             </div>
                         </div>
                     </div>

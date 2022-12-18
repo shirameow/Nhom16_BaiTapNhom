@@ -10,9 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import DAO.ThongtintaikhoanDAO;
 import DAO.loginDAO;
 import model.*;
-import DAO.ThongtintaikhoanDAO;
+
 /**
  * Servlet implementation class loginController
  */
@@ -38,7 +39,7 @@ public class loginController extends HttpServlet {
 		if(account!=null) {
 			HttpSession session=request.getSession();
 			session.setAttribute("account", account);
-			
+			RequestDispatcher rq= request.getRequestDispatcher("home.jsp");
 			ThongtintaikhoanDAO thongtin = new ThongtintaikhoanDAO();
 			if(account.getRole().equals("Sinh Viên")) {
 				SinhVienModel sv=new SinhVienModel();
@@ -55,7 +56,6 @@ public class loginController extends HttpServlet {
 				ad = thongtin.ThongTinAd(account.getUsername());
 				session.setAttribute("Info", ad);
 			}
-			RequestDispatcher rq= request.getRequestDispatcher("home.jsp");
 			rq.forward(request, response);	
 		}
 		else {

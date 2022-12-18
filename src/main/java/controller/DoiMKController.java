@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,11 +28,14 @@ public class DoiMKController extends HttpServlet {
 		String oldpw = request.getParameter("oldpw");
 		String newpw = request.getParameter("newpw");
 		String confirmpw = request.getParameter("cfpw");
+
 		HttpSession session = request.getSession();
 		accountModel acc = new accountModel();
 		acc = (accountModel) session.getAttribute("account");
+
 		AccountDAO accdao = new AccountDAO();
 		String messDMK = "";
+
 		if (oldpw.equals(acc.getPassword())) {
 			if (newpw.equals(confirmpw)) {
 				accdao.DoiMK(acc.getUsername(), newpw);
@@ -44,7 +49,7 @@ public class DoiMKController extends HttpServlet {
 		} else {
 			messDMK = "Mật khẩu không chính xác!";
 		}
-		session.setAttribute("messDMK", messDMK);
+		request.setAttribute("messDMK", messDMK);
 		request.getRequestDispatcher("thongtintaikhoan.jsp").forward(request, response);
 	}
 

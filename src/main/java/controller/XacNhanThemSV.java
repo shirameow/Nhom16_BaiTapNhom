@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.*;
 import DAO.*;
+
 @WebServlet("/xac-nhan-themSV")
 public class XacNhanThemSV extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -21,23 +22,27 @@ public class XacNhanThemSV extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
-		
+
 		String mssv = request.getParameter("Id");
 		String hoten = request.getParameter("HoTen");
 		String bomon = request.getParameter("bomon");
-		
-		ServletContext sc=getServletContext();
-		accountModel newacc=(accountModel)sc.getAttribute("newACC");
-		String taikhoan=newacc.getUsername();
+
+		ServletContext sc = getServletContext();
+		accountModel newacc = (accountModel) sc.getAttribute("newACC");
+		String taikhoan = newacc.getUsername();
 		SinhVienModel sv = new SinhVienModel(mssv, hoten, bomon, taikhoan, 0, 0);
 		String messTSV = "";
 		if (new SinhVienDAO().themSinhVien(sv)) {
 			messTSV = "Thêm sinh viên thành công";
-		} else
+			sc.removeAttribute("newACC");
+			request.setAttribute("messXTK", messTSV);
+			request.getRequestDispatcher("quanli-taikhoan").forward(request, response);
+		} else {
 			messTSV = "Thêm sinh viên thất bại";
-		sc.removeAttribute("newACC");
-		request.setAttribute("messTSV", messTSV);
-		request.getRequestDispatcher("themsinhvien.jsp").forward(request, response);
+
+			request.setAttribute("messTSV", messTSV);
+			request.getRequestDispatcher("themsinhvien.jsp").forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

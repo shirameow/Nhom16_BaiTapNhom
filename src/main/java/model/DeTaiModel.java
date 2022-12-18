@@ -4,6 +4,7 @@ public class DeTaiModel {
 	private int MaDeTai;
 	private String TenDeTai;
 	private String GiangVien;
+	
 	public DeTaiModel() {
 		super();
 	}
@@ -13,6 +14,7 @@ public class DeTaiModel {
 		TenDeTai = tenDeTai;
 		GiangVien = giangVien;
 	}
+	
 	public int getMaDeTai() {
 		return MaDeTai;
 	}
@@ -31,6 +33,5 @@ public class DeTaiModel {
 	public void setGiangVien(String giangVien) {
 		GiangVien = giangVien;
 	}
-	
 	
 }

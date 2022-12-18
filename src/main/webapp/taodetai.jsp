@@ -76,7 +76,7 @@
                                     	<tr>
                                         	<td>${dt.getMaDeTai()}</td>
                                         	<td>${dt.getTenDeTai()}</td>
-                                        	<td>${dt.getGiangVien()}</td>
+                                        	<td>${dt.getGiangVien().getHoten()}</td>
                                         </tr>
                                     </c:forEach>
 										</tbody>

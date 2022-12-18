@@ -64,4 +64,38 @@ public class ThongtintaikhoanDAO {
 		}
 		return null;
 	}
+	
+	public SinhVienModel ThongTinSinhVienTheoMSSV(String mssv) {
+		String sql = "Select * from SinhVien where MSSV=?";
+		try {
+			conn = new DBConnect().getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, mssv);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				return new SinhVienModel(rs.getString(1), rs.getString(2), rs.getString(3),
+						rs.getString(4), rs.getInt(5), rs.getInt(6));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null; 
+	}
+	
+	public String TimTenTheoMaSoSinhVien(String mssv) {
+		String sql = "Select HoTen from SinhVien where MSSV=?";
+		try {
+			conn= new DBConnect().getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,mssv);
+			rs=ps.executeQuery();
+			while(rs.next()){
+				return rs.getString(1);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
 }

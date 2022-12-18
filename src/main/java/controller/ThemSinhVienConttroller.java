@@ -28,6 +28,7 @@ public class ThemSinhVienConttroller extends HttpServlet {
 		HttpSession ses=request.getSession();
 		ses.setAttribute("listBM", listBM);
 		ses.setAttribute("listACCN", listACCN);
+		
 		request.getRequestDispatcher("themsinhvien.jsp").forward(request, response);
 	}
 

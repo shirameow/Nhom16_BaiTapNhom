@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -29,7 +30,14 @@ public class ThongTinDeTaiController extends HttpServlet {
 		GiangVienModel gv=(GiangVienModel)( ses.getAttribute("Info"));
 		String boMon=gv.getBoMon();
 		DeTaiDAO dtDAO=new DeTaiDAO();
-		List<DeTaiModel> listDT=dtDAO.getDeTaiTheoBoMon(boMon);
+		GiangVienDAO gvDAO = new GiangVienDAO();
+		
+		List<DeTaiModel> o_listDT=dtDAO.getDeTaiTheoBoMon(boMon);
+		List<DeTaiGVModel> listDT = new ArrayList<DeTaiGVModel>();
+		for(DeTaiModel detai : o_listDT) {
+			listDT.add(new DeTaiGVModel(detai.getMaDeTai(), detai.getTenDeTai(), gvDAO.TimGiangVienTheoMaGV(detai.getGiangVien())));
+		}
+		
 		List<DotDangKiModel> listDDK = new DotDangKiDAO().getDotDK();
 		DotDangKiModel ddk = listDDK.get(0);
 		ses.setAttribute("trangthaiDK", ddk.getTrangThai());

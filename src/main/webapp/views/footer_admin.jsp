@@ -6,12 +6,12 @@
             <ul>
 
                 <li>
-                    <a href="trang-chu">
+                    <a href="home">
                         KHOA CÔNG NGHỆ THÔNG TIN TRƯỜNG HCMUTE
                     </a>
                 </li>
                 <li>
-                    <a href="tin-tuc">
+                    <a href="home">
                        Tin tức
                     </a>
                 </li>

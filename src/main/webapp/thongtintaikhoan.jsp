@@ -9,7 +9,7 @@
 <!-- <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png"> -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-<title>Admin</title>
+<title>ĐĂNG KÝ ĐỀ TÀI</title>
 
 <meta
 	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'
@@ -119,7 +119,7 @@
 														<div class="row">
 															<div class="col-md-12">
 																<!-- <input type="text" class="col-md-12 form-control border-input" placeholder="" value="" name="tenLSP"> -->
-																<p>${Info.getBoMon() }
+																<p>${tenbomon}
 																<p>
 															</div>
 														</div>

@@ -50,11 +50,13 @@
                     <div class="card">
                         <div class="header">
                             <h4 class="title">Tạo Tài Khoản</h4>
+                            <c:if test="${empty newACC.getRole()}"> 
 							<div class="text-right" style="margin-right: 50px;" >
 						       <button type="submit" class="btn btn-info btn-fill btn-wd">Xác nhận</button> 
 						          
 						       
 						   </div>
+						   </c:if>
                         </div>
                         <div class="content table-responsive table-full-width">
                             <table class="table table-striped">
@@ -103,7 +105,6 @@
                                         	<div class="row">
                                                 <div class="col-md-12">
                                                     <select name="role" class="form-select col-md-12 form-control border-input" aria-label="Default select example">
-                                                    <option selected>Lựa chọn quyền</option>
                                                     <option value="Sinh Viên">Sinh Viên</option>
                                                     <option value="Giảng Viên">Giảng Viên</option>
                                                     <option value="Admin">Admin</option>
@@ -145,9 +146,11 @@
 </form>
 
 <div class="text-center" >
+	<c:if test="${empty newACC.getRole()}"> 
     <a href="quanli-taikhoan"> 
     	<button type="submit" class="btn btn-info btn-fill btn-wd">Quay lại</button>
     </a>
+    </c:if>
     <c:if test="${newACC.getRole().equals('Sinh Viên')}"> 
     <a href="them-sinh-vien"> 
     	<button type="submit" class="btn btn-info btn-fill btn-wd">Tạo người dùng</button>

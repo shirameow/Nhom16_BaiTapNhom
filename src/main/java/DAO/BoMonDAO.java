@@ -30,4 +30,23 @@ public class BoMonDAO {
 		}
 		return null;
 	}
+	
+	public String TimBoMonTheoMa(String mabm) {
+		String sql = "Select TenBoMon from BoMon where MaBoMon=?";
+		
+		try {
+			conn = new DBConnect().getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, mabm);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				return rs.getString(1);
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

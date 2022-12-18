@@ -21,15 +21,6 @@ public class ThemTaiKhoanController extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
 		
-		/*
-		 * String username=request.getParameter("username"); String
-		 * password=request.getParameter("password"); String
-		 * role=request.getParameter("role"); accountModel newacc=new
-		 * accountModel(username,password,role); String messTTK=""; if(new
-		 * AccountDAO().ThemTK(newacc)) { messTTK="Tạo tài khoản thành công!"; } else {
-		 * messTTK="Tạo tài khoản thất bại!"; } request.setAttribute("messTTK",
-		 * messTTK);
-		 */
 		request.getRequestDispatcher("themTK.jsp").forward(request, response);
 	}
 

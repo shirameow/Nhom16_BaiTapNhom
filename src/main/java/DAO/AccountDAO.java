@@ -85,31 +85,52 @@ public class AccountDAO {
 	}
 
 	public int checkRole(String taiKhoan) {
-		int a = 0;
+		int a=0;
 		String sql = "select * from TaiKhoan where Username=?";
 		try {
 			conn = new DBConnect().getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, taiKhoan);
-			accountModel acc = new accountModel();
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				acc = new accountModel(rs.getString(1), rs.getString(2), rs.getString(3));
+			accountModel acc=new accountModel();
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				acc=new accountModel(rs.getString(1),rs.getString(2),rs.getString(3));
 			}
-			String role = acc.getRole();
+			String role=acc.getRole();
 			if (role.equals("Sinh Viên"))
 				a = 1;
-			else if (role.equals("Giảng Viên"))
-				a = 2;
-			else if (role.equals("Admin"))
-				a = 3;
-
+			else if(role.equals("Giảng Viên"))
+				a=2;
+			else if(role.equals("Admin"))
+				a=3;
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return a;
+		
+		
+	}
+	public accountModel getAccountWithUsername(String userName) {
+		accountModel acc=new accountModel();
+		String sql="select * from TaiKhoan where Username=?";
+		try {
+			conn = new DBConnect().getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, userName);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				acc=new accountModel(rs.getString(1), rs.getString(2), rs.getString(3));
+			}
+			return acc;
+			
 
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	public List<accountModel> getAllAccountNoneUser(){
 		List<accountModel> listACCN = new ArrayList<accountModel>();

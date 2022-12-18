@@ -24,6 +24,7 @@ public class ThemGiangVienController extends HttpServlet {
 		List<BoMonModel> listBM=new BoMonDAO().getAllBoMon();
 		HttpSession ses=request.getSession();
 		ses.setAttribute("listBM", listBM);
+		
 		request.getRequestDispatcher("themgiangvien.jsp").forward(request, response);
 	}
 

@@ -36,13 +36,17 @@ public class TaoDeTaiController extends HttpServlet {
 		String messTDT = "";
 
 //		if (ddk.getTrangThai() == 1) {
+		if (TenDeTai != "") {
 			if (new DeTaiDAO().TaoDeTai(TenDeTai, GiangVien)) {
 				messTDT = "Tạo đề tài thành công";
 			} else
 				messTDT = "Tạo đề tài thất bại";
-			session.setAttribute("messTDT", messTDT);
-		//}
-		request.getRequestDispatcher("taodetai.jsp").forward(request, response);
+		} else {
+			messTDT = "Không được để trống tên đề tài";
+		}
+		request.setAttribute("messTDT", messTDT);
+		// }
+		request.getRequestDispatcher("thongtin-detai").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
